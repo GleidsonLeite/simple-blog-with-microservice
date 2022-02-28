@@ -2,6 +2,8 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const { randomBytes } = require("crypto")
 const cors = require("cors")
+const axios = require("axios")
+const eventBus = require("./api/eventBus")
 
 const app = express()
 app.use(bodyParser.json())
@@ -13,13 +15,20 @@ app.get("/posts", (request, response) => {
   response.send(posts)
 })
 
-app.post("/posts", (request, response) => {
+app.post("/posts", async (request, response) => {
   const id = randomBytes(4).toString("hex")
-  const {title} = request.body
+  const { title } = request.body
 
-  posts[id] = {
+  const createdPost = {
     id, title
   }
+
+  posts[id] = createdPost
+
+  await eventBus.post("/events", {
+    type: "PostCreated",
+    data: createdPost
+  })
 
   response.status(201).send(posts[id])
 })
