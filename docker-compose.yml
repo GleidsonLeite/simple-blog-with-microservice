@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  eventbus:
+    build: ./event-bus
+    container_name: eventbus
+    ports:
+      - 4005:4005
+    volumes:
+      - ./event-bus:/usr/app
+
+  posts:
+    build: ./posts
+    container_name: posts
+    ports:
+      - 4000:4000
+    volumes:
+      - ./posts:/usr/app
+
+  comments:
+    build: ./comments
+    container_name: comments
+    ports:
+      - 4001:4001
+    volumes:
+      - ./comments:/usr/app
+
+  query:
+    build: ./query
+    container_name: query
+    ports:
+      - 4002:4002
+    volumes:
+      - ./query:/usr/app
+
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/app
+
+  
