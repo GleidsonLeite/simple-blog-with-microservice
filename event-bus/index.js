@@ -11,8 +11,12 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+const events = [];
+
 app.post("/events", (request, response) => {
   const event = request.body;
+
+  events.push(event)
 
   postApi.post("/events", event)
   postCommentsApi.post("/events", event)
@@ -20,6 +24,10 @@ app.post("/events", (request, response) => {
   moderationApi.post("/events", event)
 
   response.send({ status: "OK" })
+})
+
+app.get("/events", (request, response) => {
+  response.send(events)
 })
 
 app.listen(4005, () => {
