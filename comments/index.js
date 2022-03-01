@@ -22,7 +22,11 @@ app.post("/posts/:id/comments", async (request, response) => {
   
   const postId = request.params.id
   
-  const createdComment = { id: commentId, content }
+  const createdComment = { 
+    id: commentId,
+    content,
+    status: "pending"
+  }
 
   const comments = commentsByPostId[postId] || []
   comments.push(createdComment)
@@ -40,8 +44,27 @@ app.post("/posts/:id/comments", async (request, response) => {
   response.status(201).send(comments)
 })
 
-app.post("/events", (request, response) => {
+app.post("/events", async (request, response) => {
   console.log("Event Received", request.body.type)
+
+  const { type, data } = request.body
+
+  if(type==="CommentModerated"){
+    const { postId, id, status, content } = data
+    const comments = commentsByPostId[postId]
+    const foundComment = comments.find(comment => comment.id === id)
+    foundComment.status = status
+
+    await eventBus.post("/events", {
+      type: "CommentUpdated",
+      data: {
+        id,
+        status,
+        postId,
+        content
+      }
+    })
+  }
 
   response.send({})
 })

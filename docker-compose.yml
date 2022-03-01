@@ -32,6 +32,14 @@ services:
       - 4002:4002
     volumes:
       - ./query:/usr/app
+  
+  moderation:
+    build: ./moderation
+    container_name: moderation
+    ports:
+      - 4003:4003
+    volumes:
+      - ./moderation:/usr/app
 
   client:
     build: ./client
