@@ -1,18 +1,7 @@
-import React, {useState, useEffect} from "react"
-import { postCommentsApi } from "../../../../api/PostCommentsApi"
+import React from "react"
 
-export default ({postId}) => {
-  const [comments, setComments] = useState([])
-
-  const fetchData = async () => {
-    const response = await postCommentsApi.get(`/posts/${postId}/comments`)
-    
-    setComments(response.data)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+export default ({ comments }) => {
+  
 
   return (
     <div>

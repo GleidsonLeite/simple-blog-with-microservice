@@ -30,7 +30,7 @@ app.post("/posts/:id/comments", async (request, response) => {
   commentsByPostId[postId] = comments
 
   await eventBus.post("/events", {
-    type: "PostCreated",
+    type: "CommentCreated",
     data: {
       ...createdComment,
       postId
@@ -38,6 +38,12 @@ app.post("/posts/:id/comments", async (request, response) => {
   })
 
   response.status(201).send(comments)
+})
+
+app.post("/events", (request, response) => {
+  console.log("Event Received", request.body.type)
+
+  response.send({})
 })
 
 app.listen(4001, () => {
