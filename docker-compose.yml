@@ -4,6 +4,7 @@ services:
   eventbus:
     build: ./event-bus
     container_name: eventbus
+    image: gleidsonleite/eventbus
     ports:
       - 4005:4005
     volumes:
@@ -12,6 +13,7 @@ services:
   posts:
     build: ./posts
     container_name: posts
+    image: gleidsonleite/posts
     ports:
       - 4000:4000
     volumes:
@@ -20,6 +22,7 @@ services:
   comments:
     build: ./comments
     container_name: comments
+    image: gleidsonleite/comments
     ports:
       - 4001:4001
     volumes:
@@ -28,6 +31,7 @@ services:
   query:
     build: ./query
     container_name: query
+    image: gleidsonleite/query
     ports:
       - 4002:4002
     volumes:
@@ -36,6 +40,7 @@ services:
   moderation:
     build: ./moderation
     container_name: moderation
+    image: gleidsonleite/moderation
     ports:
       - 4003:4003
     volumes:
@@ -44,6 +49,7 @@ services:
   client:
     build: ./client
     container_name: client
+    image: gleidsonleite/client
     ports:
       - 3000:3000
     volumes:
