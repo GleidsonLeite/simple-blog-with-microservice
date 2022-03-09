@@ -19,9 +19,9 @@ app.post("/events", (request, response) => {
   events.push(event)
 
   postApi.post("/events", event)
-  postCommentsApi.post("/events", event)
-  queriesApi.post("/events", event)
-  moderationApi.post("/events", event)
+  // postCommentsApi.post("/events", event)
+  // queriesApi.post("/events", event)
+  // moderationApi.post("/events", event)
 
   response.send({ status: "OK" })
 })
