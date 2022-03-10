@@ -5,7 +5,7 @@ import PostCreate from "./PostCreate";
 export default () => {
   return (
     <div className="Container">
-      <h1>Create Post</h1>
+      <h1>Create Post!!!</h1>
       <PostCreate/>
       <hr/>
       <h1>Posts</h1>
