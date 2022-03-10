@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { postCommentsApi } from "../../../../api/PostCommentsApi"
+import { postApi } from "../../../../api/PostsApi"
 
 export default ({postId}) => {
   const [content, setContent] = useState("")
@@ -10,7 +10,7 @@ export default ({postId}) => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault()
-    await postCommentsApi.post(`/posts/${postId}/comments`, {
+    await postApi.post(`/posts/${postId}/comments`, {
       content
     })
     setContent("")

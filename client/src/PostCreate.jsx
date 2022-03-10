@@ -12,7 +12,7 @@ export default () => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault("")
-    await postApi.post("/posts", {
+    await postApi.post("/posts/create", {
       title
     })
     setTitle("")
